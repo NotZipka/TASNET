@@ -1,0 +1,63 @@
+Inside [] enter the value only, without brackets.
+Instead of {} enter the command text.
+
+bot [number of bots] - specifies the number of bots on the server (adds if the number is greater than the number of bots on the server and vice versa).
+bot+ - adds one bot.
+bot- - removes one bot.
+
+more_info [off/on(0/1)] - logs actions performed from the console to the chat (e.g., bot(0)_hit 1 or bot(12)_jump 0). Can be managed through autoexec_server.
+more_info [off/on(0/1)] – writes the current frame to the chat.
+sv_get_auto_access [off/on(0/1)] - automatically grants administrator rights to the person with ID 0 when they join the server. Can be managed through autoexec_server.
+bot_on [bot ID] [not bot, bot/off, bot/on(-1/0/1)] - active action recording mode (on), non-recording mode (off).
+bot_on_multiple [first bot ID] [last bot ID] [not bot, bot/off, bot/on(-1/0/1)] - works like bot_on, but changes the state for multiple bots at once (changes both A and B).
+bot_spec [bot ID] - moves the bot to spectators (/spec). do not use when creating, as it does not work correctly. There will be a working option in future versions, but not yet.
+bot_hookcoll [off/on(0/1)] - shows the bots' hook collision.
+bot_state_{deep/freeze/solo} [bot ID] [off/on(0/1)] - directly changes a specific state of the bot. WARNING - MAY LEAD TO IMPOSSIBLE SITUATIONS! Use only if you are 100% sure there was a calculation error (not yours, e.g., during a rollback).
+bot_team_on [team number] - sets the default team for active bots (bot_on 1), so they don't interact with inactive bots. Can be managed through autoexec_server.
+bot_team_off [team number] - sets the default team for inactive bots (bot_on 0), so they don't interact with active bots. Can be managed through autoexec_server.
+bot_tp [bot ID] - teleports the bot to the center of your screen.
+
+bot_i_dir [bot ID] [left/stop/right(-1/0/1)] - bot's movement direction in the next frame.
+bot_i_jump [bot ID] [stop/jump(0/1)] - bot's jump.
+bot_i_hook [bot ID] [stop/hook(0/1)] - bot's hook.
+bot_i_fire [bot ID] [stop/hit(0/1)] - bot's hit/shoot.
+bot_i_weapon [bot ID] [hammer/pistol/shotgun/rocket/laser(1/2/3/4/5)] - bot's weapon selection.
+bot_i_angle [bot ID] [angle(0-360.00)] - sets the bot's aiming angle in degrees (up to hundredths).
+bot_i_angle_plus [bot ID] [angle(0-360.00)] - adds a value to the angle instead of setting it.
+bot_i_aim_target [bot ID] [target ID] - bot aims at another bot (target).
+bot_i_aim_spec [bot ID] - bot aims at the center of your screen (when you're in spec, it will aim where your camera is).
+bot_i_reset [bot ID] - resets the bot's pressed actions.
+bot_i [bot ID] [left/stop/right(-1/0/1)] [stop/jump(0/1)] [no/hook(0/1)] [no/hit(0/1)] [weapon(1-5)] [angle(0-360.00)] - all at once.
+bot_i2 [bot ID] [left/stop/right(-1/0/1)] [stop/jump(0/1)] [no/hook(0/1)] [no/hit(0/1)] [weapon(1-5)] [no/aim at the center of the screen(0/1)] - all at once, but different aiming.
+
+b_{input/dir/jump/hook/fire/weapon/angle/angle_plus/aim_target/aim_spec/reset} [state] - same commands with the same values but without ID, meaning it will assign values to all currently active bots.
+
+tas_step [0-10000] - runs time for a specified number of ticks (exactly 50 ticks in 1 second). Deletes all subsequent recorded actions for active bots, for inactive bots works like tas_redo.
+tas_undo [0-10000] - rewinds time backward for a specified number of frames (if not available - loads the very first one). For all bots in TAS.
+tas_redo [0-10000] - moves time forward for a specified number of frames (if not available - loads the very last one). For all bots in TAS.
+tas_plus [0-10000] - adds a frame, thus all subsequent frames will be shifted forward by the same amount. For inactive bots works like tas_undo.
+tas_minus [0-10000] - removes a frame, thus all subsequent frames will be shifted backward by the same amount. For inactive bots works like tas_redo.
+
+tas_save [0-100000] - saves the entire TAS. The entered number indicates the save slot (not frame...), without symbols.
+tas_autosave [0 - 10000] - automatically saves TAS if you reach a frame divisible by the entered number (saves only when adding). 0 turns off. By default, saves every 200 frames.
+
+tas_load_old [0-10] - allows you to load saves from previous versions. 0 - current version. 1 - for 2.x versions.
+tas_load [0-100000] - loads the entire TAS. The entered number indicates the save slot (not frame), without symbols.
+tas_frame [0-1000000] - loads a specific frame.
+
+tas_play [0-1000000] - starts TAS from a specific frame.
+tas_speed [1-100] - default speed is 10, lower slows down, higher speeds up.
+
+
+Customization and etc.:
+tas_mode_crazy [0/1] -  during playback the bot goes crazy.
+tas_mode_relax [0/1] - causes the bot to slowly move the crosshair during playback.
+tas_mode_auto_closer [ticks] - moves the bot's sight to the desired point in a certain number of frames.
+
+bot_name [bot ID] [name] - allows changing the bot's name.
+bot_clan [bot ID] [clan] - allows changing the bot's clan.
+bot_skin [bot ID] [color(0/1)] [body color] [legs color] - allows changing the bot's skin.
+bot_emote [bot ID] [emote(0-15)] - triggers the bot's emote.
+bot_emote_delay [bot ID] [tick(=<0)] - number of ticks after which the bot spams the last emote. 0 - off.
+
+Important clarification: ALL commands of the tas_input type are nothing more than copies of the bot_i commands, with the only difference being that the values they accept encompass multiple actions at once. Those who find them convenient to use will not need instructions, I am sure.
